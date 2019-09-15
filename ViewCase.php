@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="active ">
-            <a href="./View.Case.php">
+            <a href="./ViewCase.php">
               <i class="nc-icon nc-pin-3"></i>
               <p>View Case</p>
             </a>

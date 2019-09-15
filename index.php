@@ -50,25 +50,25 @@
             </a>
           </li>
           <li>
-            <a href="./View.Case.html">
+            <a href="./View.Case.php">
               <i class="nc-icon nc-pin-3"></i>
               <p>View Case</p>
             </a>
           </li>
           <li>
-            <a href="./CreateCommand.html">
+            <a href="./CreateCommand.php">
               <i class="nc-icon nc-bell-55"></i>
               <p>Create Command</p>
             </a>
           </li>
           <li>
-            <a href="./ViewCommand.html">
+            <a href="./ViewCommand.php">
               <i class="nc-icon nc-single-02"></i>
               <p>View Command</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="./tables.php">
               <i class="nc-icon nc-tile-56"></i>
               <p>Table List</p>
             </a>
