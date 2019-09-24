@@ -36,7 +36,8 @@ def AnaylsisBashHistory(logfile):
 
 
 def AnaylsisPcapFile(pcapfile):
-    #os.system(" tshark -r "+ pcapfile +" -t ad > pcap.txt")
+    wireSharkcmd = "tshark -2 -r "+pcapfile+" -T fields -E header=y -E separator=, -E occurrence=a -E quote=d -e frame.time -e ip.proto -e ip.src -e ip.dst -e udp.srcport -e udp.dstport -e tcp.stream -e tcp.seq -e tcp.flags -e tcp.srcport -e tcp.dstport -e http.request.method -e http.host -e http.request.full_uri -e http.request.version -e http.user_agent -e http.request.uri.query.parameter -e http.request.uri.query -e http.server -e http.response.code -e http.response.phrase 'ip.proto==6'> out1.csv "
+    os.system(wireSharkcmd)
 
     avRep = "data/pcap.csv"
     df = pd.read_csv(avRep)
