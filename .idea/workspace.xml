@@ -117,7 +117,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.analyse">
     <configuration name="analyse" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="sec_analyst" />
       <option name="INTERPRETER_OPTIONS" value="" />
