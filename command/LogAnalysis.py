@@ -35,13 +35,23 @@ def AnaylsisBashHistory(logfile):
     df.columns = ["BashCommand"]
 
 
-def AnaylsisPcapFile(pcapfile):
-    wireSharkcmd = "tshark -2 -r "+pcapfile+" -T fields -E header=y -E separator=, -E occurrence=a -E quote=d -e frame.time -e ip.proto -e ip.src -e ip.dst -e udp.srcport -e udp.dstport -e tcp.stream -e tcp.seq -e tcp.flags -e tcp.srcport -e tcp.dstport -e http.request.method -e http.host -e http.request.full_uri -e http.request.version -e http.user_agent -e http.request.uri.query.parameter -e http.request.uri.query -e http.server -e http.response.code -e http.response.phrase 'ip.proto==6'> out1.csv "
+def AnaylsisPcapFile(pcapfile,case,option):
+    fileName = "PcapFileSept24s.csv"
+    if option is "TCP":
+        filterPacket = 'ip.proto==6'
+        headerOption = "-e tcp.srcport -e tcp.dstport"
+    elif option is "UDP":
+        filterPacket = 'ip.proto==17'
+        headerOption = "-e udp.srcport -e udp.dstport"
+    elif option is "All":
+        filterPacket = ""
+        headerOption = "-e udp.srcport -e udp.dstport -e tcp.srcport -e tcp.dstport"
+    wireSharkcmd = "tshark -2 -r "+pcapfile+" -T fields -E header=y -E separator=, -E occurrence=a -E quote=d -e frame.time -e ip.proto -e ip.src -e ip.dst "+headerOption+" -e tcp.stream -e tcp.seq -e tcp.flags -e http.request.method -e http.host -e http.request.full_uri -e http.request.version -e http.user_agent -e http.request.uri.query.parameter -e http.request.uri.query -e http.server -e http.response.code -e http.response.phrase "+filterPacket+" > "+fileName
     os.system(wireSharkcmd)
 
     avRep = "data/pcap.csv"
-    df = pd.read_csv(avRep)
-    df.columns = ["No", "Time", "Source", "Destination", "Protocol", "Length", "Info"]
+    df = pd.read_csv(fileName,header=0)
+    #df.columns = ["No", "Time", "Source", "Destination", "Protocol", "Length", "Info"]
 
     print(df.to_string())
 
@@ -49,4 +59,4 @@ def AnaylsisPcapFile(pcapfile):
 
 
 #AnalysisAusearchLog("data/ausearch.txt")
-AnaylsisPcapFile("")
+AnaylsisPcapFile("../data/PcapFileSept24.pcapng",1,"TCP")
