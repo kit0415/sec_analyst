@@ -107,8 +107,8 @@ def findFlags(startIndex,df):
     return [False,0]
 
 
-def getWebPage(df,time):
-    suspiciousDf = df[(df["frame.time"] == time) & (df["http.request.method"] == "POST")]
+def getWebPage(df,time,method):
+    suspiciousDf = df[(df["frame.time"] == time) & (df["http.request.method"] == method)]
     url = suspiciousDf["http.request.full_uri"].unique()
     countUrl = len(suspiciousDf["http.request.full_uri"])
     return [url,countUrl]
@@ -124,7 +124,7 @@ def getBruteForce():
     for ip in checkIP:
         print "IP is ",ip
         df = checkHost(ip, bfDF)
-        requestDF = df[(df["http.request.method"] == "GET") | (df["http.request.method"] == "POST")].reset_index(drop=True)
+        requestDF = df[(df["http.request.method"] == "GET") | (df["http.request.method"] == "POST") | (df["http.request.method"] == "HEAD")].reset_index(drop=True)
         requestDF["frame.time"] = pd.to_datetime(requestDF["frame.time"]).dt.strftime("%d-%m-%Y %H:%M")
         timeList = getUniqueTime(requestDF)
         #webPageList = getWebPage(requestDF)
@@ -133,18 +133,28 @@ def getBruteForce():
         for time in timeList:
             getCount = 0
             postCount = 0
+            headCount = 0
             for i in range(len(requestDF)):
                 if requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "GET":
                     getCount +=1
                 elif requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "POST":
                     postCount +=1
+                elif requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "HEAD":
+                    headCount +=1
             if postCount > 10:
-                webPageList = getWebPage(requestDF,time)
+                webPageList = getWebPage(requestDF,time,"POST")
                 attackerIp = ip
-                print "Suspecting Bruteforce Activity at timing ", time
+                print "Suspecting Bruteforce Activity at timing ",time
                 print "Suspecting IP address: ",ip
                 print "The URL ",webPageList[0], "is access using POST method."
                 print "Peak Request Count: ",webPageList[1]
+            if headCount > 10:
+                webPageList = getWebPage(requestDF, time, "HEAD")
+                attackerIp = ip
+                print "Suspecting Directory Bruteforcing Activity at timing ",time
+                print "Suspecting IP address: ", ip
+                print "The URL ", webPageList[0], "is access using HEAD method."
+                print "Peak Request Count: ", webPageList[1]
             timingList.append(time)
             getList.append(getCount)
             postList.append(postCount)
