@@ -1,10 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import csv
+import re
 
 def pcapDF():
     fileName = "PcapFileSept24.csv"
     df = pd.read_csv(fileName, header=0)
+    df["frame.time"] = pd.to_datetime(df["frame.time"]).dt.strftime("%d-%m-%Y %H:%M:%s")
     df = df.fillna("-")
     return df
 
@@ -15,18 +16,24 @@ def findServer(df):
 
 def getUniqueHost(df):
     #fileName = "PcapFileSept24.csv"
-    excludedIP = ["192.168.43.182", "192.168.43.1", "172.217.194.190"]
+    serverIp = findServer(df)
+    excludedIP = [serverIp, "192.168.43.1", "172.217.194.190"]
     #df = pd.read_csv(fileName, header=0)
     df = df['ip.src'].unique()
     uniqueIP = [x for x in df if x not in excludedIP]
     return uniqueIP
 
+def getUniqueTime(df):
+    df = df['frame.time'].unique()
+    uniqueTime = [x for x in df]
+    return uniqueTime
 
 def checkHost(ip_add,df):
     # fileName = "PcapFileSept24.csv"
     # df = pd.read_csv(fileName, header=0)
     # df = df.fillna("-")
     serverIp = findServer(df)
+    print "Server IP is",serverIp
     df_filtered = df[(df["ip.src"] == ip_add) | (df["ip.src"]==str(serverIp[0]))]
     # print df_filtered
     # print type(df_filtered.groupby("ip.src")['tcp.srcport'].nunique())
@@ -100,9 +107,54 @@ def findFlags(startIndex,df):
     return [False,0]
 
 
+def getWebPage(df,time):
+    suspiciousDf = df[(df["frame.time"] == time) & (df["http.request.method"] == "POST")]
+    url = suspiciousDf["http.request.full_uri"].unique()
+    countUrl = len(suspiciousDf["http.request.full_uri"])
+    return [url,countUrl]
+
 def getBruteForce():
     bfDF = pcapDF()
     checkIP = getUniqueHost(bfDF)
+    print "IP List for bf is ",checkIP
+    getList = []
+    postList = []
+    timingList = []
+    attackerIp = ""
+    for ip in checkIP:
+        print "IP is ",ip
+        df = checkHost(ip, bfDF)
+        requestDF = df[(df["http.request.method"] == "GET") | (df["http.request.method"] == "POST")].reset_index(drop=True)
+        requestDF["frame.time"] = pd.to_datetime(requestDF["frame.time"]).dt.strftime("%d-%m-%Y %H:%M")
+        timeList = getUniqueTime(requestDF)
+        #webPageList = getWebPage(requestDF)
+        filterDf =  requestDF.groupby("frame.time")['http.request.method'].value_counts()
+        print filterDf
+        for time in timeList:
+            getCount = 0
+            postCount = 0
+            for i in range(len(requestDF)):
+                if requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "GET":
+                    getCount +=1
+                elif requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "POST":
+                    postCount +=1
+            if postCount > 10:
+                webPageList = getWebPage(requestDF,time)
+                attackerIp = ip
+                print "Suspecting Bruteforce Activity at timing ", time
+                print "Suspecting IP address: ",ip
+                print "The URL ",webPageList[0], "is access using POST method."
+                print "Peak Request Count: ",webPageList[1]
+            timingList.append(time)
+            getList.append(getCount)
+            postList.append(postCount)
+
+        print timingList
+        print getList
+        print postList
+        # requestDF.groupby("frame.time")['http.request.method'].value_counts().plot(kind="line")
+        # plt.xticks(rotation=90)
+        # plt.show()
 
 
 def getBruteForcefake():
@@ -119,4 +171,4 @@ def getBruteForcefake():
     plt.show()
 
 
-getPortScanResult()
+getBruteForce()
