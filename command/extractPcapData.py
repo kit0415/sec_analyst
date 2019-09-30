@@ -5,8 +5,9 @@ import re
 def pcapDF():
     fileName = "PcapFileSept24.csv"
     df = pd.read_csv(fileName, header=0)
-    df["frame.time"] = pd.to_datetime(df["frame.time"]).dt.strftime("%d-%m-%Y %H:%M:%s")
+    df["frame.time"] = pd.to_datetime(df["frame.time"]).dt.strftime("%d-%m-%Y %H:%M:%S")
     df = df.fillna("-")
+    print df
     return df
 
 def findServer(df):
@@ -111,7 +112,19 @@ def getWebPage(df,time,method):
     suspiciousDf = df[(df["frame.time"] == time) & (df["http.request.method"] == method)]
     url = suspiciousDf["http.request.full_uri"].unique()
     countUrl = len(suspiciousDf["http.request.full_uri"])
-    return [url,countUrl]
+    return [url,countUrl,suspiciousDf.index[-1]]
+
+def getHomePage(df,ip,endIndex):
+    homeDf = df.iloc[endIndex+1::].reset_index(drop=True)
+    homeDf = homeDf[homeDf["ip.src"] == ip]
+    ##2 condition to determine home page
+    initialGuess = homeDf["http.request.full_uri"][0]
+    secondGuess = homeDf["http.request.full_uri"].value_counts().index.tolist()[0]
+    if initialGuess == secondGuess:
+        return initialGuess
+    else:
+        return False
+
 
 def getBruteForce():
     bfDF = pcapDF()
@@ -125,31 +138,37 @@ def getBruteForce():
         print "IP is ",ip
         df = checkHost(ip, bfDF)
         requestDF = df[(df["http.request.method"] == "GET") | (df["http.request.method"] == "POST") | (df["http.request.method"] == "HEAD")].reset_index(drop=True)
-        requestDF["frame.time"] = pd.to_datetime(requestDF["frame.time"]).dt.strftime("%d-%m-%Y %H:%M")
-        timeList = getUniqueTime(requestDF)
+        requestDFs = requestDF
+        requestDFs["frame.time"] = pd.to_datetime(requestDF["frame.time"]).dt.strftime("%d-%m-%Y %H:%M")
+        timeList = getUniqueTime(requestDFs)
         #webPageList = getWebPage(requestDF)
-        filterDf =  requestDF.groupby("frame.time")['http.request.method'].value_counts()
+        filterDf =  requestDFs.groupby("frame.time")['http.request.method'].value_counts()
         print filterDf
         for time in timeList:
             getCount = 0
             postCount = 0
             headCount = 0
-            for i in range(len(requestDF)):
-                if requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "GET":
+            for i in range(len(requestDFs)):
+                if requestDFs["frame.time"][i] == time and requestDFs["http.request.method"][i] == "GET":
                     getCount +=1
-                elif requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "POST":
+                elif requestDFs["frame.time"][i] == time and requestDFs["http.request.method"][i] == "POST":
                     postCount +=1
-                elif requestDF["frame.time"][i] == time and requestDF["http.request.method"][i] == "HEAD":
+                elif requestDFs["frame.time"][i] == time and requestDFs["http.request.method"][i] == "HEAD":
                     headCount +=1
             if postCount > 10:
-                webPageList = getWebPage(requestDF,time,"POST")
+                webPageList = getWebPage(requestDFs,time,"POST")
                 attackerIp = ip
                 print "Suspecting Bruteforce Activity at timing ",time
                 print "Suspecting IP address: ",ip
                 print "The URL ",webPageList[0], "is access using POST method."
                 print "Peak Request Count: ",webPageList[1]
+                content = getHomePage(requestDF,ip,webPageList[2])
+                if content is not False:
+                    homepage = content
+                print "Homepage is ",homepage
+               # print "Last attempt at ",pd.to_datetime(requestDF["frame.time"][webPageList[2]].dt.strftime("%d-%m-%Y %H:%M:%S"))
             if headCount > 10:
-                webPageList = getWebPage(requestDF, time, "HEAD")
+                webPageList = getWebPage(requestDFs, time, "HEAD")
                 attackerIp = ip
                 print "Suspecting Directory Bruteforcing Activity at timing ",time
                 print "Suspecting IP address: ", ip
