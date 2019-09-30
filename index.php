@@ -18,17 +18,17 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="orange" data-active-color="danger">
+    <div class="sidebar" data-color="white" data-active-color="danger">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
     <div class="logo">
-        <a href="./index.php" class="simple-text logo-mini">
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../assets/img/logo-small.png">
           </div>
         </a>
-        <a href="./index.php" class="simple-text logo-normal">
+        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
         Protein
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
@@ -37,7 +37,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+          <li class="active ">
             <a href="./index.php">
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
@@ -50,7 +50,7 @@
             </a>
           </li>
           <li>
-            <a href="./View.Case.php">
+            <a href="./ViewCase.php">
               <i class="nc-icon nc-pin-3"></i>
               <p>View Case</p>
             </a>
@@ -66,13 +66,7 @@
               <i class="nc-icon nc-single-02"></i>
               <p>View Command</p>
             </a>
-          </li>
-          <li>
-            <a href="./tables.php">
-              <i class="nc-icon nc-tile-56"></i>
-              <p>Table List</p>
-            </a>
-          </li>         
+          </li>        
         </ul>
       </div>
     </div>
