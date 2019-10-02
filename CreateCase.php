@@ -102,61 +102,43 @@
                 <h5 class="card-title">Opening a New Case</h5>
               </div>
               <div class="card-body">
-                <form>
+                <form action="uploadCase.php" method="post" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
                         <label>Case ID</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="caseID" class="form-control">
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="Company" value="Chet">
-                      </div>
+                    <div class="col-md-4 pr-2">
+                      <label>Select Pcap to upload:</label>
+                      <input type="file" name="pcapUpload">
                     </div>
-                    <div class="col-md-6 pl-1">
-                      <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Last Name" value="Faker">
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-md-4 pr-1">
-                      <div class="form-group">
-                        <label>City</label>
-                        <input type="text" class="form-control" placeholder="City" value="Melbourne">
-                      </div>
+                    <div class="col-md-4 pr-2">
+                      <label>Select Access Log to upload:</label>
+                      <input type="file" name="accessUpload">
                     </div>
-                    <div class="col-md-4 px-1">
-                      <div class="form-group">
-                        <label>Country</label>
-                        <input type="text" class="form-control" placeholder="Country" value="Australia">
-                      </div>
-                    </div>
-                    <div class="col-md-4 pl-1">
-                      <div class="form-group">
-                        <label>Postal Code</label>
-                        <input type="number" class="form-control" placeholder="ZIP Code">
-                      </div>
+
+                    <div class="col-md-4 pr-2">
+                      <label>Select Audit Log to upload:</label>
+                      <input type="file" name="auditUpload">
                     </div>
                   </div>
+                  <br>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Comments</label>
-                        <textarea class="form-control textarea"></textarea>
+                        <textarea class="form-control textarea" name="caseDesc"></textarea>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round">Upload Case</button>
+                      <button type="submit" class="btn btn-primary btn-round" name="submit">Upload Case</button>
                     </div>
                   </div>
                 </form>
