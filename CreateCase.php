@@ -113,18 +113,8 @@
                   </div>
                   <div class="row">
                     <div class="col-md-4 pr-2">
-                      <label>Select Pcap to upload:</label>
-                      <input type="file" name="pcapUpload">
-                    </div>
-
-                    <div class="col-md-4 pr-2">
-                      <label>Select Access Log to upload:</label>
-                      <input type="file" name="accessUpload">
-                    </div>
-
-                    <div class="col-md-4 pr-2">
-                      <label>Select Audit Log to upload:</label>
-                      <input type="file" name="auditUpload">
+                      <label>Select Files to upload:</label>
+                      <input type="file" name="file[]">
                     </div>
                   </div>
                   <br>

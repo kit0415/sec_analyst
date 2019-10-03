@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from scapy.all import *
+import sys
 
 def AnalysisAusearchLog(logfile):
     with open(logfile) as infile, open(logfile + ".clean", 'w') as outfile:
@@ -57,6 +58,10 @@ def AnaylsisPcapFile(pcapfile,case,option):
 
 
 
-
+if __name__ == '__main__':
+    fileType = sys.argv[1]
+    filePath = sys.argv[2]
+    if fileType == "pcapng":
+        AnaylsisPcapFile(filePath, 1, "TCP")
 #AnalysisAusearchLog("data/ausearch.txt")
-AnaylsisPcapFile("../data/PcapFileSept24.pcapng",1,"TCP")
+
