@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6add336f-6a77-42da-badb-480b30af8be7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/CreateCase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/command/LogAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/command/LogAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/command/analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/command/analyse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/uploadCase.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +20,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/command/LogAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="303">
               <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -36,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/command/extractPcapData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-117">
-              <caret line="167" column="45" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+            <state relative-caret-position="257">
+              <caret line="183" column="46" selection-start-line="183" selection-start-column="46" selection-end-line="184" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -45,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/command/analyse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2142">
-              <caret line="126" selection-start-line="126" selection-end-line="126" />
+            <state relative-caret-position="323">
+              <caret line="125" column="68" lean-forward="true" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -326,8 +322,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/command/analyse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2142">
-          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        <state relative-caret-position="323">
+          <caret line="125" column="68" lean-forward="true" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -336,14 +332,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/command/extractPcapData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-117">
-          <caret line="167" column="45" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+        <state relative-caret-position="257">
+          <caret line="183" column="46" selection-start-line="183" selection-start-column="46" selection-end-line="184" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/command/LogAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="303">
           <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />

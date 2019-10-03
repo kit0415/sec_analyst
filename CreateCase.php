@@ -128,7 +128,7 @@
                   </div>
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round" name="submit">Upload Case</button>
+                      <input type="submit" class="btn btn-primary btn-round" name="submit" value="Upload Case"/>
                     </div>
                   </div>
                 </form>
