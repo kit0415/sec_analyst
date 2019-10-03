@@ -33,7 +33,7 @@ for ($i=2;$i<count($files)-2;$i++){
         case "log":
             if ($fileExt["filename"] == "access"){
                 echo "access log";
-                $command = "python command/analyse.py data/".$fileExt["filename"].$fileExt["extension"];
+                $command = "python command/analyse.py data/".$fileExt["filename"].".".$fileExt["extension"];
                 echo $command."<br/>";
                 shell_exec($command);
             }
