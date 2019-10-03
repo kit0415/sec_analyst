@@ -91,6 +91,8 @@ def printSuspiciousFileList(df):
     image_ext_list = ['jpg', 'png', 'jpeg', 'TIF', 'gif']
     first_suspicious_date = "null"
     file_list = []
+    file_list = []
+    timestamp_list = []
 
     #find suspicious upload file -> not image
     print "Non-Image Suspicious files Created:"
@@ -107,12 +109,16 @@ def printSuspiciousFileList(df):
                 if (first_suspicious_date == "null"):
                     first_suspicious_date = row['timestamp']
                 file_list.append(filename)
-
+                timestamp_list.append(row['timestamp'])
     file_list = list(dict.fromkeys(file_list))
-    for file in file_list:
-        print file
 
-    return file_list
+    return_list = []
+    x = range(len(file_list))
+    for n in x:
+        print n
+        return_list.append([timestamp_list[n], file_list[n]])
+    return return_list
+
 
 #print command executed
 def printCommandExecutedBySuspTime(df, first_susp_timestamp):
@@ -219,3 +225,4 @@ printModifiedFiles(auditlog_df, first_bf_timestamp_dt)
 
 printDeletedFiles(auditlog_df, first_bf_timestamp_dt)
 
+print printSuspiciousFileList(auditlog_df)
