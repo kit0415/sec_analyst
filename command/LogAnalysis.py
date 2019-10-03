@@ -2,6 +2,7 @@ import pandas as pd
 import os
 from scapy.all import *
 import sys
+from extractPcapData import *
 
 def AnalysisAusearchLog(logfile):
     with open(logfile) as infile, open(logfile + ".clean", 'w') as outfile:
@@ -54,7 +55,7 @@ def AnaylsisPcapFile(pcapfile,case,option):
     df = pd.read_csv(fileName,header=0)
     #df.columns = ["No", "Time", "Source", "Destination", "Protocol", "Length", "Info"]
 
-    print(df.to_string())
+    return fileName
 
 
 
@@ -62,6 +63,8 @@ if __name__ == '__main__':
     fileType = sys.argv[1]
     filePath = sys.argv[2]
     if fileType == "pcapng":
-        AnaylsisPcapFile(filePath, 1, "TCP")
+        fileName = AnaylsisPcapFile(filePath, 1, "TCP")
+        portResult = getPortScanResult(fileName)
+        bfResult = getBruteForce(fileName)
 #AnalysisAusearchLog("data/ausearch.txt")
 

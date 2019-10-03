@@ -2,9 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 
-def pcapDF():
-    fileName = "PcapFileSept24.csv"
-    df = pd.read_csv(fileName, header=0)
+def pcapDF(filename):
+    df = pd.read_csv(filename, header=0)
     df["frame.time"] = pd.to_datetime(df["frame.time"]).dt.strftime("%d-%m-%Y %H:%M:%S")
     df = df.fillna("-")
     print df
@@ -41,8 +40,8 @@ def checkHost(ip_add,df):
     # print df_filtered.groupby("ip.src").count()
     return df_filtered
 
-def getPortScanResult():
-    originalDF = pcapDF()
+def getPortScanResult(filename):
+    originalDF = pcapDF(filename)
     checkIP = getUniqueHost(originalDF)
     for ip in checkIP:
         print "IP use is "+ip
@@ -126,8 +125,8 @@ def getHomePage(df,ip,endIndex):
         return False
 
 
-def getBruteForce():
-    bfDF = pcapDF()
+def getBruteForce(filename):
+    bfDF = pcapDF(filename)
     checkIP = getUniqueHost(bfDF)
     print "IP List for bf is ",checkIP
     getList = []
