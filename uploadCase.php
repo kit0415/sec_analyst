@@ -26,7 +26,8 @@ for ($i=2;$i<count($files)-2;$i++){
     switch ($fileExt["extension"]){
         case "pcapng":
             echo "command is python LogAnalysis.py";
-            $command = "python command/LogAnalysis.py ".$fileExt["extension"]." 1 'TCP'";
+            $command = "python command/LogAnalysis.py ".$fileExt["extension"]." ".$fileExt["filename"].".".$fileExt["extension"]." 1 'TCP'";
+            echo $command;
             shell_exec($command);
             break;
         case "log":
