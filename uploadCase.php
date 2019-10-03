@@ -26,19 +26,22 @@ for ($i=2;$i<count($files)-2;$i++){
     switch ($fileExt["extension"]){
         case "pcapng":
             echo "command is python LogAnalysis.py";
-            $command = "python command/LogAnalysis.py ".$fileExt["extension"].".1,'TCP'";
+            $command = "python command/LogAnalysis.py ".$fileExt["extension"]." 1 'TCP'";
+            shell_exec($command);
             break;
         case "log":
             if ($fileExt["filename"] == "access"){
                 echo "access log";
-                $command = "python command/analyse.py ".$fileExt["filename"];
+                $command = "python command/analyse.py data/".$fileExt["filename"];
+                shell_exec($command);
             }
             else{
                 echo "audit log";  
             }
             break;
         default:
-            echo "Error";
+            echo "Error Occur";
+        
     }
 }
 }
