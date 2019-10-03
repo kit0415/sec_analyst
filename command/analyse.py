@@ -120,7 +120,7 @@ def generateBruteForceLogs(df):
                 3]:  # match in IP, and a GET request to the homepage indicates if the attacker has successfully login
                 loginDf.loc[entriesIndex2] = entry
                 entriesIndex2 += 1
-    loginDf.to_csv(r'bflogin_csv.csv')
+    loginDf.to_csv(r'data/bflogin_csv.csv')
 
 if __name__ == '__main__':
     bf_dataset = generateBruteForceLogs(generateApacheLogDf(sys.argv[1]))

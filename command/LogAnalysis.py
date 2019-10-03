@@ -37,7 +37,7 @@ def AnaylsisBashHistory(logfile):
 
 
 def AnaylsisPcapFile(pcapfile,case,option):
-    fileName = "PcapFileSept24new.csv"
+    fileName = "data/pcap.csv"
     if option is "TCP":
         filterPacket = 'ip.proto==6'
         headerOption = "-e tcp.srcport -e tcp.dstport"
