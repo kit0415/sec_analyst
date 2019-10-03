@@ -94,7 +94,7 @@ def generateBruteForceLogs(df):
             columns=['1-IP', '2-Username', '3-Date', '4-Request Method', '5-Response Code', '6-Bytes Out', '7-Referer',
                      '8-User Agent'])
     new_columns = resultDf.columns.values
-    resultDf.to_csv(r'bf_csv.csv')
+    resultDf.to_csv(r'data/bf_csv.csv')
     attackerIPs = resultDf['1-IP'].unique()
 
     loginDf = pd.DataFrame(

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6add336f-6a77-42da-badb-480b30af8be7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/command/LogAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/command/LogAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/uploadCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/command/analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/command/analyse.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/command/LogAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="67">
@@ -43,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/command/analyse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2125">
-              <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
+            <state relative-caret-position="143">
+              <caret line="96" column="27" selection-start-line="96" selection-start-column="27" selection-end-line="96" selection-end-column="27" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -72,6 +70,8 @@
       <find>checkHost</find>
       <find>getUniqueHost</find>
       <find>findServer</find>
+      <find>bflogin_csv.csv</find>
+      <find>.csv</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -84,8 +84,8 @@
         <option value="$PROJECT_DIR$/css/frame.css" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/command/extractPcapData.py" />
-        <option value="$PROJECT_DIR$/command/analyse.py" />
         <option value="$PROJECT_DIR$/command/LogAnalysis.py" />
+        <option value="$PROJECT_DIR$/command/analyse.py" />
       </list>
     </option>
   </component>
@@ -325,16 +325,6 @@
     <entry file="file://$PROJECT_DIR$/command/visual.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/command/analyse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/command/extractPcapData.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3111">
@@ -351,6 +341,16 @@
           <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/command/analyse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="96" column="27" selection-start-line="96" selection-start-column="27" selection-end-line="96" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
