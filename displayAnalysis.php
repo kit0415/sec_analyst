@@ -15,7 +15,28 @@
   <link href="css/bootstrap.min.css" rel="stylesheet"/>
   <link href="css/frame.css" rel="stylesheet"/>
 </head>
+<script type="text/javascript">
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
 
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
@@ -79,16 +100,9 @@
       <!-- <div class="panel-header panel-header-lg">
 
   <canvas id="bigDashboardChart"></canvas>
-  
+
 
 </div> -->
-<?php
-include "dbConn.php";
-
-$sql = "select * from logcases order by dateUploaded desc";
-$result = $conn->query($sql);
-$numOfCase = $result->num_rows;
-?>
       <div class="content">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
@@ -102,22 +116,16 @@ $numOfCase = $result->num_rows;
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Investigator</p>
-                      <p class="card-title">1
+                      <p class="card-category">Action Detected</p>
+                      <p class="card-title">?
                         <p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
-                </div>
-              </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-10 col-sm-6">
+          <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -128,44 +136,76 @@ $numOfCase = $result->num_rows;
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Total Case</p>
-                      <p class="card-title"><?php echo $numOfCase;?>
+                      <p class="card-category">Predicted Attack</p>
+                      <p class="card-title">????
                         <p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar-o"></i> Last Update: <?php $row = $result->fetch_assoc(); echo $row["dateUploaded"];?>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-vector text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Attack Duration</p>
+                      <p class="card-title">
+                        <p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
          
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Recent Case</h5>
-                <?php
-                  if ($result->num_rows>0){
-                    while ($row = $result->fetch_assoc()){
-                        echo "<li>".$row["CaseName"]."</li>";
-                    }
-                }
-                ?>
-              </div>
-              <div class="card-body ">
-                <canvas id=chartHours width="400" height="100"></canvas>
-              </div>
-              <div class="card-footer ">
-              </div>
-            </div>
-          </div>
+        <div class="nav nav-tabs">
+            <button class="btn btn-primary btn-round">Summary</button>
+            <button class="btn btn-primary btn-round" onclick="openCity(event, 'Scanning')">Scanning Attempts</button>
+            <button class="btn btn-primary btn-round" onclick="openCity(event, 'Brute')">Brute Force Attempts</button>
+            <button class="btn btn-primary btn-round" onclick="openCity(event, 'Login')">Successful Logins by Bruteforcers</button>
+            <button class="btn btn-primary btn-round" onclick="openCity(event, 'Shell')">Shell Upload</button>
+            <button class="btn btn-primary btn-round" onclick="openCity(event, 'Defacement')">Web Defacement</button>
+        </div>
+        <div id="Scanning" class="tabcontent">
+            <h1>Wireshark network capture:</h1>
+            TABLE HERE
+            <h1>Interesting findings:</h1>
+            FINDINGS HERE
+        </div>
+        <div id="Brute" class="tabcontent">
+            <h1>Bruteforce capture:</h1>
+            TABLE HERE
+            <h1>Interesting findings:</h1>
+            FINDINGS HERE
+        </div>
+        <div id="Login" class="tabcontent">
+            <h1>Login capture:</h1>
+            TABLE HERE
+            <h1>Interesting findings:</h1>
+            FINDINGS HERE
+        </div>
+        <div id="Shell" class="tabcontent">
+            <h1>Shell capture:</h1>
+            TABLE HERE
+            <h1>Interesting findings:</h1>
+            FINDINGS HERE
+        </div>
+        <div id="Defacement" class="tabcontent">
+            <h1>Audit Log:</h1>
+            TABLE HERE
+            <h1>Apache Access Log:</h1>
+            TABLE HERE
+            <h1>Interesting findings:</h1>
+            FINDINGS HERE
         </div>
       </div>
     </div>

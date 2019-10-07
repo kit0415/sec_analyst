@@ -56,18 +56,7 @@
                 <p>View Case</p>
               </a>
             </li>
-            <li>
-              <a href="./CreateCommand.php">
-                <i class="nc-icon nc-bell-55"></i>
-                <p>Create Command</p>
-              </a>
-            </li>
-            <li>
-              <a href="./ViewCommand.php">
-                <i class="nc-icon nc-single-02"></i>
-                <p>View Command</p>
-              </a>
-            </li>
+            
           </ul>
         </div>
       </div>
@@ -106,8 +95,8 @@
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
-                        <label>Case ID</label>
-                        <input type="text" name="caseID" class="form-control">
+                        <label>Case Name</label>
+                        <input type="text" name="caseName" class="form-control">
                       </div>
                     </div>
                   </div>
@@ -118,14 +107,7 @@
                     </div>
                   </div>
                   <br>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Comments</label>
-                        <textarea class="form-control textarea" name="caseDesc"></textarea>
-                      </div>
-                    </div>
-                  </div>
+                  
                   <div class="row">
                     <div class="update ml-auto mr-auto">
                       <input type="submit" class="btn btn-primary btn-round" name="submit" value="Upload Case"/>

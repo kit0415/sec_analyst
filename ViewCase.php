@@ -56,18 +56,7 @@
                 <p>View Case</p>
               </a>
             </li>
-            <li>
-              <a href="./CreateCommand.php">
-                <i class="nc-icon nc-bell-55"></i>
-                <p>Create Command</p>
-              </a>
-            </li>
-            <li>
-              <a href="./ViewCommand.php">
-                <i class="nc-icon nc-single-02"></i>
-                <p>View Command</p>
-              </a>
-            </li>
+            
           </ul>
         </div>
       </div>
@@ -93,6 +82,9 @@
 
   <canvas id="bigDashboardChart"></canvas>
 </div> -->
+<?php 
+include "selectCase.php";
+?>
         <div class="content">
           <div class="row">
             <div class="col-md-12">
@@ -101,16 +93,27 @@
                   <h5 class="card-title">List of cases</h5>
                   <hr>
                   <table style="width:100%">
-                    <tr>
+                    
                       <th>Case ID</th>
                       <th>Case Description</th>
                       <th>Date uploaded</th>
+                      <th>Action</th>
                     </tr>
                     <tr>
-                      <td>retrieve id</td>
-                      <td>retrieve link</td>
-                      <td>retrieve date</td>
-                    </tr>
+                    <?php
+                      if ($result->num_rows>0){
+                        while ($row = $result->fetch_assoc()){
+                            ?>
+                            <tr>
+                              <td><?php echo $row["caseID"];?></td>
+                              <td><?php echo $row["CaseName"];?></td>
+                              <td><?php echo $row["dateUploaded"];?></td>
+                              <td><button value="View Case" class="btn btn-primary btn-round">View Case</button></td>
+                            </tr>
+                        <?php }
+                    }
+                    ?>
+                   
 
                   </table>
                 </div>
