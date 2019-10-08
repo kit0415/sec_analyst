@@ -3,11 +3,9 @@ include "dbConn.php";
 
 if (isset($_POST['submit'])) {
 
-  $mysql = "INSERT INTO logcases (CaseDescription, pcapLog, accessLog, auditLog)
-  VALUES (?,?,?,?)";
+  $mysql = $conn->prepare("INSERT INTO logcases (caseName,dateUploaded, filepath) VALUES (?,?,?)");
 
-  $caseID = $_POST['caseID'];
-  $cDesc = $_POST['caseDesc'];
+  $caseName = $_POST['caseName'];
   $date = date("Y-m-d H:i:s");
   $countfiles = count($_FILES['file']['name']);
 
@@ -17,6 +15,10 @@ if (isset($_POST['submit'])) {
   // Upload file
   move_uploaded_file($_FILES['file']['tmp_name'][$i],'data/'.$filename); 
  }
+ $filepath = 'data/'.$filename;
+ $mysql->bind_param("sss",$caseName,$date,$filepath);
+ $mysql->execute();
+ $mysql->close();
 
 exec("unzip data/".$filename." -d data/");
 exec("rm data/".$filename);
@@ -46,4 +48,5 @@ for ($i=2;$i<count($files)-2;$i++){
         
     }
 }
+header("Location: displayAnalysis.php");
 }
